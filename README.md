@@ -19,7 +19,7 @@ This repository contains a lightweight Flask-based web service for running objec
 
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url> flask_project
+   git clone https://github.com/Jaspreets382/Vehicle-Detection.git flask_project
    cd flask_project
    ```
 
@@ -67,7 +67,7 @@ Large models, weights, and any sensitive files (e.g. `.env`) are ignored via `.g
 
 ## 📄 License
 
-This project is open source; include your preferred license (e.g., MIT) here.
+This project is open source; 
 
 ## ✨ Contributions
 
