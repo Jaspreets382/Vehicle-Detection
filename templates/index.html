@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="prefetch" href="{{ url_for('services') }}">
+  <link rel="prefetch" href="https://docs.ultralytics.com/models/yolov5">
+
+  <title>Live Vehicle Detection</title>
+  <style>
+    /* ===== Reset and Fonts ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    html{
+      scroll-behavior:smooth;
+    }
+    body {
+      background-color: #0d0d0d;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      color: #1de9b6;
+    }
+
+    /* ===== Header ===== */
+    header {
+      background: rgba(20, 20, 20, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 20px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+    }
+
+    header h1 {
+      font-size: 1.8em;
+      letter-spacing: 1px;
+      color: #00bcd4;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li {
+      font-size: 1em;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(180deg, #0d0d0d 0%, #121212 100%);
+      padding: 0 20px;
+    }
+
+    .hero h2 {
+      font-size: 3em;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 600px;
+      color: #cccccc;
+      font-size: 1.1em;
+    }
+
+    .hero button {
+      margin-top: 30px;
+      padding: 12px 30px;
+      border: none;
+      background: #00bcd4;
+      color: #0d0d0d;
+      font-weight: bold;
+      font-size: 1em;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+
+    }
+
+    .hero button:hover {
+      background: #1de9b6;
+    }
+
+    /* ===== Services / Screenshots Section ===== */
+    .services {
+      padding: 80px 10%;
+      text-align: center;
+      background-color: #111;
+    }
+
+    .services h3 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #00bcd4;
+    }
+
+    .services p {
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto 50px auto;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .screenshot {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 188, 212, 0.15);
+      transition: 0.3s;
+      height: 350px;
+      width: 350px;
+    }
+
+    .screenshot:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 30px rgba(0, 188, 212, 0.25);
+    }
+
+    .screenshot img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .hero-button{
+      background-color: #00bcd4;
+      color:black;
+      border-radius: 50px;
+      padding: 8px;
+      margin-top: 15px;
+
+    }
+    .hero-button:hover{
+      background-color: #1de9b6;
+      color: black;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background-color: #0a0a0a;
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid #222;
+      color: #777;
+    }
+
+    footer p {
+      font-size: 0.9em;
+      margin-bottom: 10px;
+    }
+
+    footer .socials a {
+      margin: 0 10px;
+      font-size: 1.2em;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 30px;
+      }
+      .hero h2 {
+        font-size: 2.2em;
+      }
+      .services h3 {
+        font-size: 1.7em;
+      }
+    }
+     .logo{
+          border-radius: 50px;
+    height: 55px;
+    width: 87px;
+
+      margin: 0;padding: 0;
+    }
+    .name{
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #typewriter {
+  font-size: 3em;
+  color: #ffffff;
+  margin-bottom: 20px;
+  border-right: 3px solid #00bcd4;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 2s steps(40, end) forwards, blink 0.75s step-end infinite ;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 90%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+  </style>
+</head>
+
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="name">
+      <img class="logo" src="static/images/Gemini_Generated_Image_bbij9qbbij9qbbij.png" alt="">
+    <h1>Live Vehicle Detection</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#footer">Contact</a></li>
+        <li><a href="https://docs.ultralytics.com/models/yolov5/">Docs</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== Hero Section ===== -->
+  <section class="hero" id="hero">
+    <h2 id="typewriter" >Real-Time Vehicle Tracking, Smarter Traffic Insights</h2>
+    <p>
+      Empowering smarter cities with live vehicle detection and counting technology.  
+      Our data helps predict and prevent traffic congestion — enhancing navigation, logistics, and public planning.
+    </p>
+<a href="{{ url_for('services') }}" class="hero-button">Explore Services</a>
+  </section>
+
+  <!-- ===== Services / Screenshots ===== -->
+  <section class="services" id="services">
+    <h3>Our Technology in Action</h3>
+    <p>Below are real-time captures from our detection system showing live vehicle counting and tracking capabilities.</p>
+
+    <div class="screenshot-grid">
+      <div class="screenshot"><img src="static\images\OIP (1).webp" alt="Vehicle Detection Screenshot 1"></div>
+      <div class="screenshot"><img src="static\images\OIP (2).webp" alt="Vehicle Detection Screenshot 2"></div>
+      <div class="screenshot"><img src="static\images\OIP.webp" alt="Vehicle Detection Screenshot 3"></div>
+      <div class="screenshot"><img src="static\images\OIP (3).webp" alt="Vehicle Detection Screenshot 4"></div>
+      <div class="screenshot"><img src="static/images/Gemini_Generated_Image_dz6mbzdz6mbzdz6m.png" alt="Vehicle Detection Screenshot 4"></div>
+      <div class="screenshot"><img src="static/images/Gemini_Generated_Image_d9xzsgd9xzsgd9xz.png" alt="Vehicle Detection Screenshot 4"></div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer id="footer">
+    <p>© 2025 Live Vehicle Detection. All Rights Reserved.</p>
+    <p class="socials">
+      <a href="#">LinkedIn</a> | 
+      <a href="#">GitHub</a> | 
+      <a href="#">Contact Us</a>
+    </p>
+  </footer>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const text = "Real-Time Vehicle Tracking, Smarter Traffic Insights";
+  const typewriter = document.getElementById("typewriter");
+  typewriter.textContent = text; // The CSS animation handles the typing
+});
+</script>
+</body>
+</html>

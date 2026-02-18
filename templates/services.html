@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Explore Services | Live Vehicle Detection</title>
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0d0d;
+      color: #f5f5f5;
+      font-family: 'Poppins', sans-serif;
+    }
+     * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+  header {
+      background: rgba(20, 20, 20, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 20px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+    }
+
+    header h1 {
+      font-size: 1.8em;
+      letter-spacing: 1px;
+      color: #00bcd4;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li {
+      font-size: 1em;
+    }
+
+    /* ===== Main Content ===== */
+    main {
+      padding: 80px 10%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    main h2 {
+      font-size: 2.5em;
+      color: #00bcd4;
+      margin-bottom: 10px;
+      margin-top: 0%;
+    }
+
+    main p {
+      color: #bbb;
+      max-width: 700px;
+      margin-bottom: 40px;
+    }
+     a {
+      color: #00bcd4;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      color: #1de9b6;
+    }
+
+    /* ===== Video Section ===== */
+    .video-section {
+      width: 100%;
+      max-width: 1200px;
+      background: #121212;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(0, 188, 212, 0.1);
+      border: 1px solid #1a1a1a;
+    }
+
+    .video-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .video-feed {
+      flex: 2;
+      min-width: 400px;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      /* box-shadow: 0 0 25px rgba(0, 188, 212, 0.15); */
+      box-shadow: 20px  20px 20px rgba(1, 182, 206, 0.264);
+    }
+
+    .video-feed img {
+      width: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ===== Vehicle Stats ===== */
+    .stats-box {
+      flex: 1;
+      min-width: 280px;
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 20px 20px 20px rgba(1, 182, 206, 0.264);
+      text-align: left;
+    }
+
+    .stats-box h3 {
+      color: #00bcd4;
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #222;
+      padding-bottom: 10px;
+    }
+
+    .stats-box p, .stats-box li {
+      color: #ccc;
+      margin: 8px 0;
+      font-size: 1.05em;
+    }
+
+    .stats-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    /* ===== Controls ===== */
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .controls label {
+      color: #bbb;
+      font-weight: 500;
+    }
+
+    select, button {
+      background: #0d0d0d;
+      border: 1px solid #00bcd4;
+      color: #f5f5f5;
+      border-radius: 6px;
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover, select:hover {
+      border-color: #1de9b6;
+      color: #1de9b6;
+    }
+
+    /* ===== Toggle Button ===== */
+    .toggle-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 16vw;
+      margin-bottom: 25px;
+      font-size: 1.1em;
+      color: #ccc;
+    }
+
+    .toggle-button img {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .toggle-button img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 6px #00bcd4);
+    }
+
+    footer {
+      margin-top: 80px;
+      background-color: #0a0a0a;
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid #222;
+      color: #777;
+    }
+
+    footer a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+
+
+#fade-in {
+  animation: fadeIn 3s forwards ease-in-out;
+}
+
+    @media (max-width: 900px) {
+      .video-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .logo{
+          border-radius: 50px;
+    height: 55px;
+    width: 87px;
+
+      margin: 0;
+      padding: 0;
+    }
+    .name{
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #typewriter {
+  font-size: 3em;
+  color: #ffffff;
+  margin-bottom: 20px;
+  border-right: 3px solid #00bcd4;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 2s steps(40, end) forwards, blink 0.75s step-end infinite ;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 50%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0; /* Start completely transparent */
+  }
+  100% {
+    opacity: 1; /* End fully opaque */
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Header ===== -->
+    <header>
+      <div class="name">
+        <img class="logo" src="static/images/Gemini_Generated_Image_bbij9qbbij9qbbij.png" alt="">
+    <h1>Live Vehicle Detection</h1>
+      </div>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#footer">Contact</a></li>
+        <li><a href="https://docs.ultralytics.com/models/yolov5/">Docs</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== Main Content ===== -->
+  <main>
+    <h2 id="typewriter">Live Vehicle Detection</h2>
+    <p id="fade-in" ><b>REAL-TIME ROAD VEHICLE DETECTION AND ANALYTICS SYSTEM</b> powered by YOLOv5.<br> Stay informed with smart traffic insights and live analytics.</p>
+
+    <div  class="toggle-button">
+      <span>Start / Stop</span>
+      <img id="toggle-button" src="{{ url_for('static', filename='images/play.svg') }}" alt="Toggle Stream">
+    </div>
+
+    <div class="video-section">
+      <div class="video-wrapper">
+        <div id="fade-in" class="video-feed">
+          <img id="video_feed" src="/video_feed" alt="Video Stream" />
+        </div>
+
+        <div id="fade-in" class="stats-box">
+          <h3>Live Vehicle Count</h3>
+          <p>Total Vehicles: <span id="vehicle-count">0</span></p>
+          <ul id="vehicle-breakdown">
+            <li>Car: <span id="car-count">0</span></li>
+            <li>Bus: <span id="bus-count">0</span></li>
+            <li>Truck: <span id="truck-count">0</span></li>
+            <li>Motorbike: <span id="motorbike-count">0</span></li>
+          </ul>
+
+          <div  class="controls">
+            <label for="videoSelect">Change Footage:</label>
+            <select id="videoSelect">
+              <option value="vehicle.mp4">Video 1</option>
+              <option value="cars.mp4">Video 2</option>
+              <option value="rush.mp4">Video 3</option>
+              <option value="traffic.mp4">Video 4</option>
+            </select>
+            <button id="" onclick="changeVideo()">Change Video</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>© 2025 VehicleVision. All Rights Reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Contact</a></p>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
